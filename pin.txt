@@ -1,31 +1,43 @@
-TX
+* 이 컨트롤러는 아카데미과학 사의 K2 BB탄 소총을 기반으로 제작되었습니다.
 
-디지털
+==TX (총기, gun)==
+	-메인보드(controller)-
+		arduino pro mini 328p 5v
 
-BT tx 2 rx3 pin 2018
+	-디지털-
+		블루투스(HC-06)
+			BT - tx 2, rx 3, pin 2018, role S(슬레이브 모드) 
 
-버튼
+		버튼(TACT switch)
+			격발 - 4
+			조준- 5
+			탄창쪽 장전 - 6
+			슬라이드쪽 장전 - 7
+			달리기 - 8
+			웅크리기 - 9
+			이전 총기 변경 - 10
+			다음 총기 변경 - 11
 
-	격발 4
-	조준 5
-	탄창쪽 장전 6
-	슬라이드쪽 장전 7
-	달리기 8
-	웅크리기 9
-	무기 변경 -- 10
-	무기 변경 ++ 11
+		LED
+			전원 LED 13(built in led)
 
-전원 LED 13
+	-아날로그-
+		조이스틱
+			이동 조이스틱 - x A0 y A1 sw D2 (권총손잡이 부분)
+			시선 조이스틱 - x A6 y A7(방열손잡이 부분)
 
-아날로그
+	-I2C-
+		GY-521(gyro, MPU6050) sda 4 scl 5
 
-	이동 조이스틱 x A0 y A1 sw 2
-	시선 조이스틱 x A6 y A7
+==RX (수신기, receiver)==
+	-디지털-
+		블루투스(HC-06)
+			BT - tx 10, rx 11, pin 2018, role M(마스터 모드)
 
-I2C
-
-	자이로 sda 4 scl 5
-
-RX
-
-BT tx 2 rx3 pin 2018
+=BT module binding(블루투스 모듈간 바인딩)=
+	두 블루투스 모듈을 각각 다르게 모드를 설정해주어야 합니다.
+		master BT => AT+ROLE=M
+		slave BT => AT+ROLE=S
+	단, 블루투스 모듈 간의 비번이 동일해야 바인딩이 성립되게 됩니다.
+		master BT => AT+PIN(password)
+		slave BT => AT+PIN(password)
