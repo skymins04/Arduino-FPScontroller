@@ -70,21 +70,21 @@ void loop() {
   gyroZ = GyZ / Sensitivity * -1;
 
   if (analogRead(SIGHT_X) < 400) {
-    gyroZ += map(analogRead(SIGHT_X),400,0,10,50)*-1;
+    gyroZ += map(analogRead(SIGHT_X),400,0,10,20);
   }
   if (analogRead(SIGHT_X) > 600) {
-    gyroZ += map(analogRead(SIGHT_X),600,1023,10,50);
+    gyroZ += map(analogRead(SIGHT_X),600,1023,10,20)*-1;
   }
   if (analogRead(SIGHT_Y) < 400) {
-    gyroX += map(analogRead(SIGHT_Y),400,0,10,50)*-1;
+    gyroX += map(analogRead(SIGHT_Y),400,0,10,20)*-1;
   }
   if (analogRead(SIGHT_Y) > 600) {
-    gyroX += map(analogRead(SIGHT_Y),600,1023,10,50);
+    gyroX += map(analogRead(SIGHT_Y),600,1023,10,20);
   }
 
   if(digitalRead(SHOT) == 1) shotKey = '1';
   if(digitalRead(ZOOM) == 1) zoomKey = '1';
-  if(digitalRead(RELOAD_AMA) == 1) reloadKey = '1';
+  if(digitalRead(RELOAD_AMA) == 1 || digitalRead(RELOAD_PRO) == 1) reloadKey = '1';
   if(digitalRead(RUN) == 1) runKey = '1';
   if(digitalRead(SQUAT) == 1) squatKey = '1';
   if(digitalRead(CHANGE_P) == 1) changeKey = '1';
@@ -125,5 +125,5 @@ void loop() {
 
   Serial.println(SendData);
   BT.println(SendData);
-  delay(10);
+  //delay(10);
 }
