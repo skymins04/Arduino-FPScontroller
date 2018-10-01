@@ -59,16 +59,17 @@ void loop() {
     if(readData[11] == '1') Keyboard.write(' ');
     if(readData[12] != ' ') Keyboard.write(readData[12]);
 
-    int first = readData.indexOf(","); // 첫번째 콤마위치
-    int second = readData.indexOf(",",first+1); // 두번째 콤마 위치
-    int strlength = readData.length(); // 문자열 길이
-    String str2 = readData.substring(first+1, second); // 두번째 토큰
-    String str3 = readData.substring(second+1,strlength); // 세번째 토큰
+    // 단락 구분
+    int first = readData.indexOf(",");
+    int second = readData.indexOf(",",first+1);
+    int strlength = readData.length();
+    String str2 = readData.substring(first+1, second);
+    String str3 = readData.substring(second+1,strlength);
    
    int16_t gyroX = str2.toInt();
    int16_t gyroZ = str3.toInt();
 
-   Mouse.move(gyroX,gyroZ);
+   Mouse.move(gyroX-0,gyroZ-1.5); // gyro - X 에서 X는 gyro 보정값
    
     DataEnd = false;
     readData = "";
